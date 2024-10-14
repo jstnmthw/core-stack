@@ -3,7 +3,6 @@ import { UsersService } from '../users.service';
 import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
-  ValidationArguments,
 } from 'class-validator';
 
 @ValidatorConstraint({ async: true })
@@ -11,12 +10,12 @@ import {
 export class IsEmailUniqueConstraint implements ValidatorConstraintInterface {
   constructor(private readonly usersService: UsersService) {}
 
-  async validate(email: string, args: ValidationArguments) {
+  async validate(email: string) {
     const user = await this.usersService.findByEmail(email);
     return !user; // Return true if email is not found, meaning it's unique
   }
 
-  defaultMessage(args: ValidationArguments) {
+  defaultMessage() {
     return 'Email $value is already in use';
   }
 }
