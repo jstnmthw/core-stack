@@ -8,7 +8,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Validation Pipe
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
 
   // Add security headers
   app.use(helmet());

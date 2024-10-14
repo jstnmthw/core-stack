@@ -1,6 +1,22 @@
+import {
+  IsAlphanumeric,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
+
 export class CreateUserDto {
-  name: string;
+  @IsOptional()
+  @IsAlphanumeric()
+  name: string | null;
+
+  @IsOptional()
+  @IsAlphanumeric()
+  nickname: string | null;
+
+  @IsEmail()
   email: string;
-  nickname: string;
+
+  @IsNotEmpty()
   password: string;
 }
