@@ -1,5 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+export enum UserStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  BANNED = 'banned',
+  USER_DELETED = 'user-deleted',
+}
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -15,10 +22,13 @@ export class User {
   nickname: string;
 
   @Column({ nullable: true })
-  password: string;
+  avatar: string;
 
   @Column({ nullable: true })
-  status: string;
+  password: string;
+
+  @Column({ type: 'enum', enum: UserStatus, default: UserStatus.ACTIVE })
+  status: UserStatus;
 
   @Column({ nullable: true })
   seen: Date;
