@@ -3,7 +3,7 @@ services:
     container_name: app
     image: node:20.18.0
     ports:
-      - "3001:${APP_PORT:-3001}"
+      - '3001:${APP_PORT:-3001}'
     volumes:
       - .:/app
     environment:
@@ -18,14 +18,14 @@ services:
     container_name: db
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - '3306:${DB_PORT:-3306}'
     restart: unless-stopped
 
   rabbitmq:
