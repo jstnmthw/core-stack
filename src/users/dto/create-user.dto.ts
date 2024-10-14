@@ -1,10 +1,10 @@
+import { IsEmailUnique } from '../validators/is-email-unique.decorator';
 import {
   IsAlphanumeric,
   IsEmail,
   IsNotEmpty,
   IsOptional,
 } from 'class-validator';
-import { IsEmailUnique } from '../validators/is-email-unique.decorator';
 
 export class CreateUserDto {
   @IsOptional()
