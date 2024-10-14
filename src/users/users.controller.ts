@@ -1,3 +1,6 @@
+import { User } from './user.entity';
+import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto';
 import {
   Body,
   Controller,
@@ -7,9 +10,6 @@ import {
   Post,
   ParseIntPipe,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './user.entity';
-import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
@@ -23,6 +23,11 @@ export class UsersController {
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
+  }
+
+  @Get('email/:email')
+  findByEmail(@Param('email') email: string): Promise<User> {
+    return this.usersService.findByEmail(email);
   }
 
   @Get(':id')

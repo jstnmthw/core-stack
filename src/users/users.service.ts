@@ -29,17 +29,11 @@ export class UsersService {
     return this.usersRepository.findOneBy({ id: id });
   }
 
-  async remove(id: string): Promise<void> {
-    await this.usersRepository.delete(id);
+  findByEmail(email: string): Promise<User> {
+    return this.usersRepository.findOne({ where: { email } });
   }
 
-  async createRandomUser(): Promise<User> {
-    const randomUser: Partial<User> = {
-      name: `User12`,
-      nickname: `nick_12`,
-      email: `user_12@example.com`,
-      password: 'passsowrddsd',
-    };
-    return await this.create(randomUser as CreateUserDto);
+  async remove(id: string): Promise<void> {
+    await this.usersRepository.delete(id);
   }
 }
