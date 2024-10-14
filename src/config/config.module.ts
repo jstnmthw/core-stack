@@ -6,12 +6,12 @@ import { typeOrmConfig } from './typeorm.config';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // Makes config globally available
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         await typeOrmConfig(configService),
-      inject: [ConfigService], // Inject the ConfigService
     }),
   ],
 })
