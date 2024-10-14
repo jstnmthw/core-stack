@@ -1,6 +1,7 @@
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import {
   Body,
   Controller,
@@ -9,7 +10,13 @@ import {
   Param,
   Post,
   ParseIntPipe,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
+
+interface UserRequest extends Request {
+  user: User;
+}
 
 @Controller('users')
 export class UsersController {
@@ -20,6 +27,7 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
