@@ -11,12 +11,7 @@ import {
   Post,
   ParseIntPipe,
   UseGuards,
-  Request,
 } from '@nestjs/common';
-
-interface UserRequest extends Request {
-  user: User;
-}
 
 @Controller('users')
 export class UsersController {
