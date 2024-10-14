@@ -7,11 +7,8 @@ export class AuthService {
   constructor(private usersService: UsersService) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    console.log('email', email);
     const user = await this.usersService.findByEmail(email);
     const isPassSame = await bcrypt.compare(pass, user.password);
-
-    console.log('isPassSame', isPassSame);
 
     if (user && isPassSame) {
       const { password, ...result } = user;
