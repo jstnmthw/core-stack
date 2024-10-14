@@ -7,4 +7,8 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+
+  getIndex(): string {
+    return 'Welcome to the API';
+  }
 }
