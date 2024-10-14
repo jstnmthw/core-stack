@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsOptional,
 } from 'class-validator';
+import { IsEmailUnique } from '../validators/is-email-unique.decorator';
 
 export class CreateUserDto {
   @IsOptional()
@@ -14,6 +15,7 @@ export class CreateUserDto {
   @IsAlphanumeric()
   nickname: string | null;
 
+  @IsEmailUnique()
   @IsEmail()
   email: string;
 
