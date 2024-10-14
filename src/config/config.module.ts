@@ -5,9 +5,7 @@ import { typeOrmConfig } from './typeorm.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true, // Makes config globally available
-    }),
+    ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       useFactory: async (configService: ConfigService) =>
         await typeOrmConfig(configService),
