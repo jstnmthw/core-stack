@@ -1,0 +1,69 @@
+services:
+  app:
+    container_name: app
+    image: node:20.18.0
+    ports:
+      - "3001:${APP_PORT:-3001}"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=${APP_ENV:-dev}
+    command: sh -c "cd /app && npm run start:${APP_ENV:-dev}"
+    restart: unless-stopped
+    depends_on:
+      - db
+      - rabbitmq
+
+  db:
+    container_name: db
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:management
+    ports:
+      - '5672:${RABBITMQ_PORT:-5672}'
+      - '15672:${RABBITMQ_MANAGEMENT_PORT:-15672}'
+      - '15692:${RABBITMQ_PROMETHEUS_PORT:-15692}'
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-admin}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-admin}
+      RABBITMQ_PROMETHEUS: 1
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    ports:
+      - '9090:${PROMETHEUS_PORT:-9090}'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana-enterprise
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - '3000:${GRAFANA_PORT:-3000}'
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+volumes:
+  db-data:
+  grafana-data:
+  rabbitmq-data:
