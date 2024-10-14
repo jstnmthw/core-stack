@@ -9,5 +9,6 @@ import { IsEmailUniqueConstraint } from './validators/is-email-unique';
   imports: [TypeOrmModule.forFeature([User])],
   providers: [UsersService, IsEmailUniqueConstraint],
   controllers: [UsersController],
+  exports: [UsersService],
 })
 export class UsersModule {}
