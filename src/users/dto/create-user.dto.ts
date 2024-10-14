@@ -1,4 +1,4 @@
-import { IsEmailUnique } from '../validators/is-email-unique.decorator';
+import { IsEmailUnique } from '../validators/is-email-unique';
 import {
   IsAlphanumeric,
   IsEmail,
