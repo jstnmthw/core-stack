@@ -8,7 +8,7 @@ import {
 } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { Action } from './action.enum';
-import { User } from '../users/user.entity';
+import { User } from '../users/entities/user.entity';
 
 type Subjects = InferSubjects<typeof User> | 'all';
 type PossibleAbilities = [Action, Subjects];
@@ -25,6 +25,7 @@ export class CaslAbilityFactory {
 
     // Users
     can([Action.Read, Action.Update], User, { id: user.id });
+    cannot(Action.Delete, User, { id: user.id });
 
     // Admins
     if (user.roles.some((role) => role.name === 'admin')) {

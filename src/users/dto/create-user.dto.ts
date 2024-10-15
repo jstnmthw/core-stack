@@ -4,7 +4,6 @@ import {
   IsEmail,
   IsNotEmpty,
   IsOptional,
-  IsStrongPassword,
 } from 'class-validator';
 
 export class CreateUserDto {

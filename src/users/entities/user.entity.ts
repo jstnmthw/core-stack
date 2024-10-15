@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
-import { Role } from '../roles/roles.entity';
+import { Role } from '../roles/entities/role.entity';
 
 export enum UserStatus {
   ACTIVE = 'active',
