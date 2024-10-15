@@ -5,9 +5,10 @@ import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
 import { UsersModule } from './users/users.module';
 import { AppConfigModule } from './config/config.module';
 import { AuthModule } from './auth/auth.module';
+import { CaslModule } from './casl/casl.module';
 
 @Module({
-  imports: [AppConfigModule, UsersModule, RabbitMQModule, AuthModule],
+  imports: [AppConfigModule, UsersModule, RabbitMQModule, AuthModule, CaslModule],
   controllers: [AppController],
   providers: [AppService],
 })

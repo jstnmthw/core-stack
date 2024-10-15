@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Role } from '../roles/roles.entity';
 
 export enum UserStatus {
   ACTIVE = 'active',
@@ -32,6 +33,9 @@ export class User {
 
   @Column({ nullable: true })
   seen: Date;
+
+  @ManyToMany(() => Role, (role) => role.users)
+  roles: Role[];
 
   @Column({ default: () => 'CURRENT_TIMESTAMP', nullable: true })
   createdAt: Date;
