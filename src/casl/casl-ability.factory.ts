@@ -28,9 +28,9 @@ export class CaslAbilityFactory {
     cannot(Action.Delete, User, { id: user.id });
 
     // Admins
-    if (user.roles.some((role) => role.name === 'admin')) {
-      can(Action.Manage, 'all');
-    }
+    // if (user.roles.some((role) => role.name === 'admin')) {
+    //   can(Action.Manage, 'all');
+    // }
 
     return build({
       // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details
