@@ -12,29 +12,29 @@ export class RolesService {
     private readonly rolesRepository: Repository<Role>,
   ) {}
 
-  create(createRoleDto: CreateRoleDto) {
+  async create(createRoleDto: CreateRoleDto) {
     return this.rolesRepository.save(createRoleDto);
   }
 
-  findAll() {
+  async findAll() {
     return this.rolesRepository.find();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.rolesRepository.findOne({ where: { id } });
   }
 
-  await findByName(name: string) {
-    const res = this.rolesRepository.findOne({ where: { name } });
+  async findByName(name: string) {
+    const res = await this.rolesRepository.findOne({ where: { name } });
     console.log(res);
-    return this.rolesRepository.findOne({ where: { name } });
+    return res;
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
+  async update(id: number, updateRoleDto: UpdateRoleDto) {
     return this.rolesRepository.update(id, updateRoleDto);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.rolesRepository.delete(id);
   }
 }
