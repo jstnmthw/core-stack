@@ -1,8 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
+import { AppModule } from './app.module';
+import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   // Create the NestJS application
