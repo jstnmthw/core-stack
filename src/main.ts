@@ -22,7 +22,7 @@ async function bootstrap() {
   app.enableCors();
 
   // Enable versioning
-  app.enableVersioning();
+  // app.enableVersioning();
 
   // Use class-validator
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
