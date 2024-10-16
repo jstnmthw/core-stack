@@ -25,9 +25,7 @@ export class RolesService {
   }
 
   async findByName(name: string) {
-    const res = await this.rolesRepository.findOne({ where: { name } });
-    console.log(res);
-    return res;
+    return await this.rolesRepository.findOne({ where: { name } });
   }
 
   async update(id: number, updateRoleDto: UpdateRoleDto) {

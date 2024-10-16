@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { RolesService } from '../roles.service';
 import {
+  ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
   registerDecorator,
@@ -14,6 +15,7 @@ export class IsNameUniqueConstraint implements ValidatorConstraintInterface {
   async validate(name: string) {
     const role = await this.rolesService.findByName(name);
     if (role) return false;
+    return true;
   }
 
   defaultMessage() {
@@ -21,12 +23,12 @@ export class IsNameUniqueConstraint implements ValidatorConstraintInterface {
   }
 }
 
-export function IsNameUnique() {
+export function IsNameUnique(validationOptions?: ValidationOptions) {
   return function (object: any, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
-      options: { message: 'Name already exists.' },
+      options: validationOptions,
       constraints: [],
       validator: IsNameUniqueConstraint,
     });
