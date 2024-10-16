@@ -1,10 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { Role } from '../../roles/entities/role.entity';
 
 export enum UserStatus {
@@ -40,9 +34,8 @@ export class User {
   @Column({ nullable: true })
   seen: Date;
 
-  // @ManyToMany(() => Role, (role) => role.users, { nullable: true })
-  // @JoinTable()
-  // roles: Role[];
+  @ManyToMany(() => Role, (role) => role.users, { nullable: true })
+  roles: Role[];
 
   @Column({ default: () => 'CURRENT_TIMESTAMP', nullable: true })
   createdAt: Date;
