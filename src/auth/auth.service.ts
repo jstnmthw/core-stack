@@ -31,4 +31,15 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
     };
   }
+
+  async logout() {}
+
+  async user(token: string) {
+    const decoded = this.jwtService.decode(token);
+    try {
+      return await this.usersService.findByEmail(decoded['email']);
+    } catch (e) {
+      return { error: e.message };
+    }
+  }
 }
